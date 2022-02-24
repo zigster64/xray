@@ -1,5 +1,8 @@
 zig-cache
 zig-out
 libraylib.a
+bin
+sounds
 *.core
+.ccls-cache
 

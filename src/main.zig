@@ -6,16 +6,31 @@
 //
 
 const rl = @import("raylib");
+const print = @import("std").debug.print;
 
 pub fn main() anyerror!void {
     // Initialization
     //--------------------------------------------------------------------------------------
-    const screenWidth = 800;
-    const screenHeight = 450;
+    const screenWidth = 1366;
+    const screenHeight = 768;
 
-    rl.InitWindow(screenWidth, screenHeight, "raylib-zig [core] example - basic window");
+    rl.InitWindow(screenWidth, screenHeight, "Raylib Experiments");
+
+    const monitor_count = rl.GetMonitorCount();
+    print("Monitors = {}\n", .{monitor_count});
+    print("Screen = {}x{}\n", .{ rl.GetScreenWidth(), rl.GetScreenHeight() });
 
     rl.SetTargetFPS(60); // Set our game to run at 60 frames-per-second
+
+    rl.InitAudioDevice();
+    //const track = rl.LoadSound("sounds/exorcism.opus");
+    //const track = rl.LoadSound("sounds/vril.mp4");
+    //const track = rl.LoadSound("sounds/detroit.mp3");
+    const track = rl.LoadSound("sounds/backhome.ogg");
+    //const track = rl.LoadSound("sounds/cherrypie.ogg");
+    print("track = {}\n", .{track});
+    rl.PlaySound(track);
+
     //--------------------------------------------------------------------------------------
 
     // Main game loop
@@ -31,7 +46,9 @@ pub fn main() anyerror!void {
 
         rl.ClearBackground(rl.WHITE);
 
-        rl.DrawText("Congrats! You created your first window!", 190, 200, 20, rl.LIGHTGRAY);
+        rl.DrawText("Start Game", screenWidth / 2 - 100, screenHeight / 2, 48, rl.BLUE);
+
+        rl.DrawFPS(20, 20);
 
         rl.EndDrawing();
         //----------------------------------------------------------------------------------
@@ -39,6 +56,8 @@ pub fn main() anyerror!void {
 
     // De-Initialization
     //--------------------------------------------------------------------------------------
+    rl.StopSound(track);
+    rl.CloseAudioDevice();
     rl.CloseWindow(); // Close window and OpenGL context
     //--------------------------------------------------------------------------------------
 }
