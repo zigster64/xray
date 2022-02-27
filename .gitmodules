@@ -1,3 +1,6 @@
 [submodule "raylib-zig"]
 	path = raylib-zig
 	url = git@github.com:zigster64/raylib-zig.git
+[submodule "apple_pie"]
+	path = apple_pie
+	url = git@github.com:zigster64/apple_pie.git

@@ -22,16 +22,18 @@ pub fn main() anyerror!void {
 
     rl.SetTargetFPS(60); // Set our game to run at 60 frames-per-second
 
-    rl.InitAudioDevice();
-    //const track = rl.LoadSound("sounds/exorcism.opus");
-    //const track = rl.LoadSound("sounds/vril.mp4");
-    //const track = rl.LoadSound("sounds/detroit.mp3");
-    const track = rl.LoadSound("sounds/backhome.ogg");
+    // rl.InitAudioDevice();
+    // const track = rl.LoadSound("sounds/exorcism.opus");
+    // const track = rl.LoadSound("sounds/vril.mp4");
+    // const track = rl.LoadSound("sounds/detroit.mp3");
+    // const track = rl.LoadSound("sounds/backhome.ogg");
     // const track = rl.LoadSound("sounds/cherrypie.ogg");
-    print("track = {}\n", .{track});
-    rl.PlaySound(track);
+    // print("track = {}\n", .{track});
+    // rl.PlaySound(track);
 
     //--------------------------------------------------------------------------------------
+    var mx: c_int = 0;
+    var my: c_int = 0;
 
     // Main game loop
     while (!rl.WindowShouldClose()) { // Detect window close button or ESC key
@@ -39,6 +41,16 @@ pub fn main() anyerror!void {
         //----------------------------------------------------------------------------------
         // TODO: Update your variables here
         //----------------------------------------------------------------------------------
+        const mouse_x = rl.GetMouseX();
+        const mouse_y = rl.GetMouseY();
+        const mp = rl.GetMousePosition();
+        const md = rl.GetMouseDelta();
+
+        if (mouse_x != mx or mouse_y != my) {
+            mx = mouse_x;
+            my = mouse_y;
+            print("mouse {}:{} {}->{}\n", .{ mx, my, mp, md });
+        }
 
         // Draw
         //----------------------------------------------------------------------------------
@@ -46,7 +58,8 @@ pub fn main() anyerror!void {
 
         rl.ClearBackground(rl.WHITE);
 
-        rl.DrawText("Start Game", screenWidth / 2 - 100, screenHeight / 2, 48, rl.BLUE);
+        rl.DrawText("Looking for Game Servers ...", screenWidth / 4, screenHeight / 2, 48, rl.BLUE);
+        //rl.DrawText("Start Game", screenWidth / 2 - 100, screenHeight / 2, 48, rl.BLUE);
 
         rl.DrawFPS(20, 20);
 
@@ -56,8 +69,8 @@ pub fn main() anyerror!void {
 
     // De-Initialization
     //--------------------------------------------------------------------------------------
-    rl.StopSound(track);
-    rl.CloseAudioDevice();
+    // rl.StopSound(track);
+    // rl.CloseAudioDevice();
     rl.CloseWindow(); // Close window and OpenGL context
     //--------------------------------------------------------------------------------------
 }
