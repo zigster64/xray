@@ -33,6 +33,8 @@ fn addClient(b: *Builder, mode: Mode, target: Target) *Step {
     raylib.addAsPackage("raylib", exe);
     raylib.math.addAsPackage("raylib-math", exe);
 
+    exe.addPackagePath("disco", "src/disco/discovery.zig");
+
     const run_cmd = exe.run();
     const run_step = b.step("run-client", "run xclient");
     run_step.dependOn(&run_cmd.step);

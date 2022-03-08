@@ -7,6 +7,7 @@
 
 const rl = @import("raylib");
 const print = @import("std").debug.print;
+const disco = @import("disco");
 
 pub fn main() anyerror!void {
     // Initialization
@@ -30,6 +31,11 @@ pub fn main() anyerror!void {
     // const track = rl.LoadSound("sounds/cherrypie.ogg");
     // print("track = {}\n", .{track});
     // rl.PlaySound(track);
+
+    //--------------------------------------------------------------------------------------
+    // Lets discover some servers
+
+    disco.discover();
 
     //--------------------------------------------------------------------------------------
     var mx: c_int = 0;
@@ -65,6 +71,7 @@ pub fn main() anyerror!void {
 
         rl.EndDrawing();
         //----------------------------------------------------------------------------------
+        disco.discover();
     }
 
     // De-Initialization

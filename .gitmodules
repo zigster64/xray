@@ -4,3 +4,9 @@
 [submodule "apple_pie"]
 	path = apple_pie
 	url = git@github.com:zigster64/apple_pie.git
+[submodule "zig-network"]
+	path = zig-network
+	url = git@github.com:MasterQ32/zig-network.git
+[submodule "s2s"]
+	path = s2s
+	url = git@github.com:ziglibs/s2s.git
